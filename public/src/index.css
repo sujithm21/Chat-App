@@ -1,0 +1,21 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Protest+Riot&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Oswald:wght@200..700&family=Protest+Riot&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+button,
+input {
+  /* font-family: "Protest Riot", sans-serif; */
+  font-family: "Oswald", sans-serif;
+}
+
+body {
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
+}
