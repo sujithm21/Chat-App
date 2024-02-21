@@ -5,6 +5,7 @@ import Logo from "../assets/logo.svg";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { registerRoute } from "../utils/APIRoutes";
 
 function Register() {
   const [values, setvalues] = useState({
@@ -17,8 +18,13 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (handleValidation()) {
+      console.log("In validation", registerRoute);
       const { password, confirmPassword, username, email } = values;
-      const { data } = await axios.post();
+      const { data } = await axios.post(registerRoute, {
+        username,
+        email,
+        password,
+      });
     }
   };
 
@@ -32,7 +38,7 @@ function Register() {
 
   const handleValidation = () => {
     const { password, confirmPassword, username, email } = values;
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       toast.error(
         "password and confirm password should be same.",
         toastOptions
@@ -44,7 +50,7 @@ function Register() {
     } else if (password.length < 7) {
       toast.error("Password should be atleast 7 characters.", toastOptions);
       return false;
-    } else if (email.length == 0) {
+    } else if (email.length === 0) {
       toast.error("Email cannot be empty.", toastOptions);
       return false;
     }
