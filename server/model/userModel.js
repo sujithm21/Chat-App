@@ -9,22 +9,22 @@ const userSchema = new mongoose.Schema({
     unique: true,
   },
   email: {
-    type: string,
+    type: String,
     max: 20,
     required: true,
     unique: true,
   },
   password: {
-    type: string,
+    type: String,
     min: 7,
     required: true,
   },
   isAvaatrImage: {
-    type: boolean,
+    type: Boolean,
     default: false,
   },
   avatarImage: {
-    type: string,
+    type: String,
     defalut: "",
   },
 });
