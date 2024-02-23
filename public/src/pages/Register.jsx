@@ -17,6 +17,14 @@ function Register() {
     confirmpassword: "",
   });
 
+//   useEffect(() => {
+//     if (localStorage.getItem("chat-app-user")) {
+//         navigate("/");
+//     }
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+// }, []);
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (handleValidation()) {
