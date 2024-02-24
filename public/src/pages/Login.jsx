@@ -10,12 +10,12 @@ import { loginRoute } from "../utils/APIRoutes";
 function Login() {
   const navigate = useNavigate();
 
-//   useEffect(() => {
-//     if (localStorage.getItem("chat-app-user")) {
-//         navigate("/");
-//     }
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-// }, []);
+  useEffect(() => {
+    if (localStorage.getItem("chat-app-user")) {
+        navigate("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
 
   const [values, setvalues] = useState({
