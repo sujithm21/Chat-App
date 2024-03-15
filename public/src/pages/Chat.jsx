@@ -3,42 +3,60 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { allUsersRoutes } from "../utils/APIRoutes";
+import Contacts from "../components/Contacts";
+import Welcome from "../components/Welcome";
 
 function Chat() {
   const navigate = useNavigate();
 
   const [contacts, setContacts] = useState([]);
-  const [currentUser, setCurrentUser] = useState;
-  undefined;
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [currentChat, setCurrentChat] = useState(undefined);
+
   //useEffect will be executed in order wise
   //so try to write useEffects in order
 
   //If there is no user in local storage
-  useEffect(async () => {
-    if (!localStorage.getItem("chat-app-user")) {
-      navigate("/login");
-    }
-    //if any user is present then setcurrent user
-    else {
-      setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
-    }
-  }, []);
-
-  //run this hook whenever there is a current user
-  useEffect(async () => {
-    if (currentUser) {
-      if (currentUser.isAvatarImageSet) {
-        const data = await axios.get(`${allUsersRoutes}/${currentUser._id}`);
-        setContacts(data.data);
+  useEffect(() => {
+    async function checkUser() {
+      if (!localStorage.getItem("chat-app-user")) {
+        navigate("/login");
       } else {
-        navigate("/setAvatar");
+        setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
       }
     }
-  }, []);
+
+    checkUser();
+
+    // Since we don't have any dependencies, we pass an empty dependency array
+  }, [navigate]);
+
+  //run this hook whenever there is a current user
+  useEffect(() => {
+    async function fetchContacts() {
+      if (currentUser) {
+        if (currentUser.isAvatarImageSet) {
+          const data = await axios.get(`${allUsersRoutes}/${currentUser._id}`);
+          setContacts(data.data);
+        } else {
+          navigate("/setAvatar");
+        }
+      }
+    }
+
+    fetchContacts();
+  }, [currentUser, navigate]);
+
+  const handleChatChange = (chat) => {
+    setCurrentChat(chat);
+  };
 
   return (
     <Container>
-      <div className="container"></div>
+      <div className="container">
+        <Contacts contacts={contacts} currentUser={currentUser} changeChat ={handleChatChange}/>
+        <Welcome currentUser={currentUser} />
+      </div>
     </Container>
   );
 }
