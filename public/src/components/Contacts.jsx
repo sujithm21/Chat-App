@@ -21,26 +21,26 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
 
   return (
     <>
-      {currentUserImage && currentUserName && (
+      {currentUserImage && currentUserImage && (
         <Container>
           <div className="brand">
             <img src={logo} alt="logo" />
             <h3>Chatify</h3>
           </div>
           <div className="contacts">
-            {contacts.map((index, contact) => {
+            {contacts.map((contact, index) => {
               return (
                 <div
+                  key={contact._id}
                   className={`contact ${
                     index === currentSelected ? "selected" : ""
                   }`}
-                  key={index}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
                   <div className="avatar">
                     <img
                       src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                      alt="avatar"
+                      alt=""
                     />
                   </div>
                   <div className="username">
@@ -58,7 +58,7 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
               />
             </div>
             <div className="username">
-              <h3>{currentUserName}</h3>
+              <h2>{currentUserName}</h2>
             </div>
           </div>
         </Container>
